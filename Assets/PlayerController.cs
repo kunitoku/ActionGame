@@ -3,6 +3,7 @@
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D _rigid2D;
+    private Animator _animator;
     private const float JumpForce = 700.0f;
     private const float WalkForce = 30.0f;
     private const float MaxWalkSpeed = 2.0f;
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _rigid2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
         // ジャンプ
         if (Input.GetKeyDown(KeyCode.Space) && _rigid2D.velocity.y == 0)
         {
+            _animator.SetTrigger("JumpTrigger");
             _rigid2D.AddForce(transform.up * JumpForce);
         }
 
@@ -52,6 +55,16 @@ public class PlayerController : MonoBehaviour
         if (key != 0)
         {
             transform.localScale = new Vector3(key, 1, 1);
+        }
+
+        // プレイヤーの動きに応じてアニメーション
+        if (_rigid2D.velocity.y == 0)
+        {
+            _animator.speed = speedx / 2.0f;
+        }
+        else
+        {
+            _animator.speed = 1.0f;
         }
     }
 }
