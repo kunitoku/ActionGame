@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow)) key = 1;
         if (Input.GetKey(KeyCode.LeftArrow)) key = -1;
 #else
-        // ジャンプ
+// ジャンプ
         if (Input.GetMouseButtonDown(0) && _rigid2D.velocity.y == 0)
         {
             _animator.SetTrigger("JumpTrigger");
@@ -67,5 +67,15 @@ public class PlayerController : MonoBehaviour
         {
             _animator.speed = 1.0f;
         }
+
+        // 画面外に出た時の処理
+        if (!(transform.position.y < -5)) return;
+        transform.position = Vector3.zero;
+        _rigid2D.velocity = Vector2.zero;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("ゴール");
     }
 }
