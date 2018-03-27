@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
         // ジャンプ
         if (Input.GetMouseButtonDown(0) && _rigid2D.velocity.y == 0)
         {
+            _animator.SetTrigger("JumpTrigger");
             _rigid2D.AddForce(transform.up * JumpForce);
         }
 
