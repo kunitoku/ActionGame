@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -74,8 +75,8 @@ public class PlayerController : MonoBehaviour
         _rigid2D.velocity = Vector2.zero;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
+    void OnTriggerEnter2D(Collider2D other) {
         Debug.Log("ゴール");
+        SceneManager.LoadScene("ClearScene");
     }
 }
